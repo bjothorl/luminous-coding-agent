@@ -19,7 +19,7 @@ export type ApprovalDecision = "allow" | "always" | "deny";
 
 export type SessionEvent =
   | { type: "agent:start"; agentId: string; role: AgentRole; model: string; task: string }
-  | { type: "agent:token"; agentId: string; text: string }
+  | { type: "agent:token"; agentId: string; role: AgentRole; text: string }
   | { type: "agent:tool:start"; agentId: string; callId: string; tool: string; detail: string }
   | { type: "agent:tool:end"; agentId: string; callId: string; tool: string; ok: boolean; detail: string }
   | { type: "agent:usage"; agentId: string; input: number; output: number }

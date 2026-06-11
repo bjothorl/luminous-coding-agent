@@ -4,12 +4,20 @@ import { Box, Text } from "ink";
 export interface ChatItem {
   id: number;
   kind: "user" | "assistant" | "tool" | "subagent" | "info" | "error";
+  /** Subagent id, e.g. explorer-1. */
   label?: string;
+  /** Subagent role, e.g. explorer. */
+  role?: string;
+  /** When set, this subagent row is a tool invocation. */
+  tool?: string;
   text: string;
   ok?: boolean;
 }
 
-const STREAMING_ID = -1;
+const STREAMING_ORCHESTRATOR_ID = -1;
+
+/** Live subagent token buffers keyed by agent id. */
+export type SubagentStream = { role: string; label: string; text: string };
 
 type InkColor = "black" | "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white";
 
@@ -76,9 +84,18 @@ function itemToLines(item: ChatItem, width: number): DisplayLine[] {
       pushWrapped(lines, `  ${mark} ${item.label} ${item.text}`, width, { dimColor: true });
       break;
     }
-    case "subagent":
-      pushWrapped(lines, `\u251C\u2500 ${item.label} ${item.text}`, width, { color: "yellow" });
+    case "subagent": {
+      const who =
+        item.role && item.label ? `${item.role} \u00B7 ${item.label}` : item.label ?? "subagent";
+      if (item.tool) {
+        const mark = item.ok === false ? "\u2717" : "\u2192";
+        pushWrapped(lines, `  ${mark} ${who} \u00B7 ${item.tool} ${item.text}`, width, { dimColor: true });
+      } else {
+        lines.push({ text: `  \u2514 ${who}`, dimColor: true });
+        pushWrapped(lines, item.text, width, { dimColor: true });
+      }
       break;
+    }
     case "error":
       pushWrapped(lines, item.text, width, { color: "red" });
       break;
@@ -95,13 +112,39 @@ export function buildChatLines(items: ChatItem[], width: number): DisplayLine[] 
   return items.flatMap((item) => itemToLines(item, w));
 }
 
-function withStreaming(items: ChatItem[], streamingText: string): ChatItem[] {
-  if (streamingText.length === 0) return items;
-  return [...items, { id: STREAMING_ID, kind: "assistant", text: streamingText }];
+function withStreaming(
+  items: ChatItem[],
+  streamingText: string,
+  subagentStreams: Map<string, SubagentStream>
+): ChatItem[] {
+  let next = items;
+  let streamId = STREAMING_ORCHESTRATOR_ID - 1;
+  for (const stream of subagentStreams.values()) {
+    if (stream.text.length === 0) continue;
+    next = [
+      ...next,
+      {
+        id: streamId--,
+        kind: "subagent" as const,
+        role: stream.role,
+        label: stream.label,
+        text: stream.text,
+      },
+    ];
+  }
+  if (streamingText.length > 0) {
+    next = [...next, { id: STREAMING_ORCHESTRATOR_ID, kind: "assistant", text: streamingText }];
+  }
+  return next;
 }
 
-export function countChatLines(items: ChatItem[], streamingText: string, width: number): number {
-  return buildChatLines(withStreaming(items, streamingText), width).length;
+export function countChatLines(
+  items: ChatItem[],
+  streamingText: string,
+  subagentStreams: Map<string, SubagentStream>,
+  width: number
+): number {
+  return buildChatLines(withStreaming(items, streamingText, subagentStreams), width).length;
 }
 
 interface SliceResult {
@@ -143,14 +186,15 @@ function sliceLines(lines: DisplayLine[], height: number, scrollBack: number): S
 export interface ChatProps {
   items: ChatItem[];
   streamingText: string;
+  subagentStreams: Map<string, SubagentStream>;
   height: number;
   width: number;
   /** Lines scrolled up from the bottom (0 = pinned to latest). */
   scrollBack: number;
 }
 
-export function Chat({ items, streamingText, height, width, scrollBack }: ChatProps) {
-  const lines = buildChatLines(withStreaming(items, streamingText), width);
+export function Chat({ items, streamingText, subagentStreams, height, width, scrollBack }: ChatProps) {
+  const lines = buildChatLines(withStreaming(items, streamingText, subagentStreams), width);
   const { visible, hiddenAbove, hiddenBelow, showTopBar, showBottomBar } = sliceLines(
     lines,
     height,

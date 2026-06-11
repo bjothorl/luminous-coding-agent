@@ -11,9 +11,9 @@ import type { TodoStore } from "../session/todo.js";
 import type { UsageTracker } from "../session/usage.js";
 import { formatTokens } from "../session/usage.js";
 import type { TodoItem } from "../types.js";
-import { AgentStatus, type AgentView } from "./AgentStatus.js";
+import { AgentStatus, agentLineCount, countSubagentLines, type AgentView } from "./AgentStatus.js";
 import { Approval } from "./Approval.js";
-import { Chat, countChatLines, type ChatItem } from "./Chat.js";
+import { Chat, countChatLines, type ChatItem, type SubagentStream } from "./Chat.js";
 import { DiffView, type EditView } from "./DiffView.js";
 import type { MouseInput } from "./mouse.js";
 import { StatusBar } from "./StatusBar.js";
@@ -35,6 +35,11 @@ const WHEEL_SCROLL_LINES = 3;
 
 let chatSeq = 0;
 
+function roleFromAgentId(agentId: string): string {
+  const dash = agentId.lastIndexOf("-");
+  return dash > 0 ? agentId.slice(0, dash) : agentId;
+}
+
 const TODO_GLYPH: Record<TodoItem["status"], string> = {
   pending: "\u25CB",
   in_progress: "\u25D0",
@@ -55,6 +60,7 @@ export function App({ services }: { services: AppServices }) {
     }))
   );
   const [streamingText, setStreamingText] = useState("");
+  const [subagentStreams, setSubagentStreams] = useState<Map<string, SubagentStream>>(new Map());
   const [agents, setAgents] = useState<Map<string, AgentView>>(new Map());
   const [approvalQueue, setApprovalQueue] = useState<ApprovalRequest[]>([]);
   const [lastEdit, setLastEdit] = useState<EditView | undefined>(undefined);
@@ -62,12 +68,15 @@ export function App({ services }: { services: AppServices }) {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [scrollBack, setScrollBack] = useState(0);
+  const [agentScrollBack, setAgentScrollBack] = useState(0);
   const [, setTick] = useState(0);
 
   const abortRef = useRef<AbortController | undefined>(undefined);
   const streamingRef = useRef("");
+  const subagentStreamingRef = useRef(new Map<string, SubagentStream>());
   const toolRows = useRef(new Map<string, number>());
   const scrollMetricsRef = useRef({ totalLines: 0, viewportLines: 20 });
+  const agentScrollMetricsRef = useRef({ totalLines: 0, viewportLines: 8 });
 
   const scrollByLines = useCallback((delta: number) => {
     setScrollBack((prev) => {
@@ -83,13 +92,36 @@ export function App({ services }: { services: AppServices }) {
     return id;
   }, []);
 
-  const flushStreaming = useCallback(() => {
-    const text = streamingRef.current.trim();
+  const clearOrchestratorStream = useCallback(() => {
     streamingRef.current = "";
     setStreamingText("");
+  }, []);
+
+  const flushOrchestratorStream = useCallback(() => {
+    const text = streamingRef.current.trim();
+    clearOrchestratorStream();
     if (text) addChat({ kind: "assistant", text });
     return text;
-  }, [addChat]);
+  }, [addChat, clearOrchestratorStream]);
+
+  const flushSubagentStream = useCallback(
+    (agentId: string, role: string) => {
+      const stream = subagentStreamingRef.current.get(agentId);
+      if (!stream) return;
+      subagentStreamingRef.current.delete(agentId);
+      setSubagentStreams(new Map(subagentStreamingRef.current));
+      const text = stream.text.trim();
+      if (text) {
+        addChat({ kind: "subagent", role, label: agentId, text: `reply \u00B7 ${text}` });
+      }
+    },
+    [addChat]
+  );
+
+  const clearSubagentStreams = useCallback(() => {
+    subagentStreamingRef.current.clear();
+    setSubagentStreams(new Map());
+  }, []);
 
   // Re-render every second while agents are running so timers advance.
   useEffect(() => {
@@ -133,15 +165,30 @@ export function App({ services }: { services: AppServices }) {
             return next;
           });
           if (event.agentId !== orchestratorId) {
+            setAgentScrollBack(0);
             const brief = event.task.length > 80 ? `${event.task.slice(0, 80)}...` : event.task;
-            addChat({ kind: "subagent", label: event.agentId, text: brief });
+            addChat({
+              kind: "subagent",
+              role: event.role,
+              label: event.agentId,
+              text: `started \u00B7 ${brief}`,
+            });
           }
           break;
         }
         case "agent:token": {
-          if (event.agentId === orchestratorId) {
+          if (event.role === "orchestrator") {
             streamingRef.current += event.text;
             setStreamingText(streamingRef.current);
+          } else {
+            const existing = subagentStreamingRef.current.get(event.agentId);
+            const next: SubagentStream = {
+              role: event.role,
+              label: event.agentId,
+              text: (existing?.text ?? "") + event.text,
+            };
+            subagentStreamingRef.current.set(event.agentId, next);
+            setSubagentStreams(new Map(subagentStreamingRef.current));
           }
           break;
         }
@@ -154,8 +201,18 @@ export function App({ services }: { services: AppServices }) {
             return next;
           });
           if (event.agentId === orchestratorId) {
-            flushStreaming();
+            flushOrchestratorStream();
+            if (event.tool === "Task") clearSubagentStreams();
             const rowId = addChat({ kind: "tool", label: event.tool, text: event.detail });
+            toolRows.current.set(event.callId, rowId);
+          } else {
+            const rowId = addChat({
+              kind: "subagent",
+              role: roleFromAgentId(event.agentId),
+              label: event.agentId,
+              tool: event.tool,
+              text: event.detail,
+            });
             toolRows.current.set(event.callId, rowId);
           }
           break;
@@ -174,6 +231,11 @@ export function App({ services }: { services: AppServices }) {
             setChatItems((prev) =>
               prev.map((item) => (item.id === rowId ? { ...item, ok: event.ok, text: event.detail } : item))
             );
+          }
+          // Drop any token garbage that landed in the orchestrator stream while
+          // parallel subagents were hammering the same llama-server instance.
+          if (event.agentId === orchestratorId && event.tool === "Task") {
+            clearOrchestratorStream();
           }
           break;
         }
@@ -201,12 +263,14 @@ export function App({ services }: { services: AppServices }) {
             return next;
           });
           if (event.agentId !== orchestratorId) {
+            flushSubagentStream(event.agentId, event.report.role);
             const r = event.report;
             const files = r.filesTouched.length > 0 ? ` \u00B7 ${r.filesTouched.length} file(s)` : "";
             addChat({
               kind: "subagent",
+              role: r.role,
               label: event.agentId,
-              text: `${r.status}${files} \u00B7 ${r.toolCallCount} tool calls \u00B7 ${formatTokens(
+              text: `finished \u00B7 ${r.status}${files} \u00B7 ${r.toolCallCount} tool calls \u00B7 ${formatTokens(
                 r.tokens.input + r.tokens.output
               )} tok`,
             });
@@ -214,7 +278,16 @@ export function App({ services }: { services: AppServices }) {
           break;
         }
         case "agent:error": {
-          addChat({ kind: "error", text: `${event.agentId}: ${event.error}` });
+          if (event.agentId === orchestratorId) {
+            addChat({ kind: "error", text: `${event.agentId}: ${event.error}` });
+          } else {
+            addChat({
+              kind: "subagent",
+              role: roleFromAgentId(event.agentId),
+              label: event.agentId,
+              text: `error \u00B7 ${event.error}`,
+            });
+          }
           break;
         }
         case "approval:request": {
@@ -233,7 +306,15 @@ export function App({ services }: { services: AppServices }) {
           break;
       }
     });
-  }, [bus, orchestrator.id, addChat, flushStreaming]);
+  }, [
+    bus,
+    orchestrator.id,
+    addChat,
+    flushOrchestratorStream,
+    flushSubagentStream,
+    clearOrchestratorStream,
+    clearSubagentStreams,
+  ]);
 
   const pendingApproval = approvalQueue[0];
 
@@ -244,6 +325,33 @@ export function App({ services }: { services: AppServices }) {
         bus.resolveApproval(pendingApproval.id, c === "y" ? "allow" : c === "a" ? "always" : "deny");
         setApprovalQueue((prev) => prev.slice(1));
       }
+      return;
+    }
+    if (key.shift && key.upArrow) {
+      setAgentScrollBack((prev) => prev + ARROW_SCROLL_LINES);
+      return;
+    }
+    if (key.shift && key.downArrow) {
+      setAgentScrollBack((prev) => Math.max(0, prev - ARROW_SCROLL_LINES));
+      return;
+    }
+    if (key.shift && key.pageUp) {
+      setAgentScrollBack((prev) => prev + agentScrollMetricsRef.current.viewportLines);
+      return;
+    }
+    if (key.shift && key.pageDown) {
+      setAgentScrollBack((prev) =>
+        Math.max(0, prev - agentScrollMetricsRef.current.viewportLines)
+      );
+      return;
+    }
+    if (key.shift && key.end) {
+      setAgentScrollBack(0);
+      return;
+    }
+    if (key.shift && key.home) {
+      const { totalLines, viewportLines } = agentScrollMetricsRef.current;
+      setAgentScrollBack(Math.max(0, totalLines - viewportLines));
       return;
     }
     if (key.upArrow) {
@@ -287,7 +395,7 @@ export function App({ services }: { services: AppServices }) {
             "/agents  show agent roles and their models",
             "/model   show resolved model endpoints",
             "/cost    show token usage",
-            "/clear   clear chat and orchestrator memory",
+            "/clear   clear chat, orchestrator memory, and agent list",
             "/exit    quit",
           ].join("\n"),
         });
@@ -313,7 +421,12 @@ export function App({ services }: { services: AppServices }) {
         store.clear();
         setChatItems([]);
         setScrollBack(0);
-        addChat({ kind: "info", text: "(chat and orchestrator memory cleared)" });
+        clearOrchestratorStream();
+        clearSubagentStreams();
+        setAgents(new Map());
+        setAgentScrollBack(0);
+        toolRows.current.clear();
+        addChat({ kind: "info", text: "(chat, orchestrator memory, and agent list cleared)" });
         return true;
       }
       if (cmd === "/exit" || cmd === "/quit") {
@@ -326,7 +439,7 @@ export function App({ services }: { services: AppServices }) {
       }
       return false;
     },
-    [addChat, config, exit, orchestrator, store, usage]
+    [addChat, clearOrchestratorStream, clearSubagentStreams, config, exit, orchestrator, store, usage]
   );
 
   const handleSubmit = useCallback(
@@ -350,7 +463,8 @@ export function App({ services }: { services: AppServices }) {
       orchestrator
         .run(text, { signal: controller.signal })
         .then((report) => {
-          const remainder = flushStreaming();
+          const remainder = flushOrchestratorStream();
+          clearSubagentStreams();
           const finalText = report.summary.trim();
           // Avoid duplicating the final message if streaming already captured it.
           if (finalText && finalText !== remainder) {
@@ -366,13 +480,16 @@ export function App({ services }: { services: AppServices }) {
           abortRef.current = undefined;
         });
     },
-    [addChat, busy, flushStreaming, handleCommand, orchestrator, store]
+    [addChat, busy, clearSubagentStreams, flushOrchestratorStream, handleCommand, orchestrator, store]
   );
 
   const activeAgents = useMemo(
     () => [...agents.values()].filter((a) => a.state === "running").length,
     [agents]
   );
+
+  const agentViews = useMemo(() => [...agents.values()], [agents]);
+  const orchestratorModel = resolveModelConfig(config, "orchestrator").model;
 
   const rows = stdout?.rows ?? 35;
   const columns = stdout?.columns ?? 100;
@@ -381,9 +498,35 @@ export function App({ services }: { services: AppServices }) {
   // belong to the chat pane; whatever is left is the chat's line budget.
   const chatHeight = rows - 1 - 1 - 3 - 1 - (pendingApproval ? 5 : 0);
   const chatWidth = columns - sideWidth - 2;
+  const todosLines = todoItems.length > 0 ? 2 + Math.min(8, todoItems.length) : 0;
+  const diffMinLines = 5;
+  const agentStatusHeight = Math.max(8, chatHeight - todosLines - diffMinLines);
+  const orchestratorViewLines = agentLineCount(
+    agentViews.find((a) => a.id === orchestrator.id) ?? {
+      id: orchestrator.id,
+      role: "orchestrator",
+      model: orchestratorModel,
+      state: busy ? "running" : "queued",
+      detail: busy ? "thinking..." : "",
+      tokens: 0,
+      startedAt: 0,
+    }
+  );
+  const subagentListHeight = Math.max(
+    1,
+    agentStatusHeight -
+      1 -
+      orchestratorViewLines -
+      (countSubagentLines(agentViews, orchestrator.id) > 0 ? 1 : 0)
+  );
+
   scrollMetricsRef.current = {
-    totalLines: countChatLines(chatItems, streamingText, chatWidth),
+    totalLines: countChatLines(chatItems, streamingText, subagentStreams, chatWidth),
     viewportLines: Math.max(1, chatHeight),
+  };
+  agentScrollMetricsRef.current = {
+    totalLines: countSubagentLines(agentViews, orchestrator.id),
+    viewportLines: subagentListHeight,
   };
 
   return (
@@ -401,6 +544,7 @@ export function App({ services }: { services: AppServices }) {
         <Chat
           items={chatItems}
           streamingText={streamingText}
+          subagentStreams={subagentStreams}
           height={chatHeight}
           width={chatWidth}
           scrollBack={scrollBack}
@@ -408,12 +552,20 @@ export function App({ services }: { services: AppServices }) {
         <Box
           flexDirection="column"
           width={sideWidth}
+          height={chatHeight}
           borderStyle="round"
           borderDimColor
           flexShrink={0}
           overflow="hidden"
         >
-          <AgentStatus agents={[...agents.values()]} />
+          <AgentStatus
+            orchestratorId={orchestrator.id}
+            orchestratorModel={orchestratorModel}
+            agents={agentViews}
+            busy={busy}
+            height={agentStatusHeight}
+            scrollBack={agentScrollBack}
+          />
           {todoItems.length > 0 && (
             <Box flexDirection="column" paddingX={1} marginTop={1}>
               <Text bold dimColor>

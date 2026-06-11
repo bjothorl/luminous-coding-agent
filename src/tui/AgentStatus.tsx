@@ -15,6 +15,16 @@ export interface AgentView {
   endedAt?: number;
 }
 
+export interface AgentStatusProps {
+  orchestratorId: string;
+  orchestratorModel: string;
+  agents: AgentView[];
+  busy: boolean;
+  height: number;
+  /** Lines scrolled up from the bottom of the subagent list (0 = pinned to latest). */
+  scrollBack: number;
+}
+
 function glyphFor(state: AgentRuntimeState): React.ReactNode {
   switch (state) {
     case "running":
@@ -38,35 +48,183 @@ function elapsed(agent: AgentView): string {
   return `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`;
 }
 
-const MAX_AGENTS = 8;
+export function agentLineCount(agent: AgentView): number {
+  let lines = 2;
+  if (agent.state === "running" && agent.detail.length > 0) lines += 1;
+  return lines;
+}
 
-export function AgentStatus({ agents }: { agents: AgentView[] }) {
-  const shown = agents.slice(-MAX_AGENTS);
+export function countSubagentLines(agents: AgentView[], orchestratorId: string): number {
+  return agents
+    .filter((a) => a.id !== orchestratorId)
+    .reduce((sum, agent) => sum + agentLineCount(agent), 0);
+}
+
+function resolveOrchestrator(
+  orchestratorId: string,
+  orchestratorModel: string,
+  agents: AgentView[],
+  busy: boolean
+): AgentView {
+  const existing = agents.find((a) => a.id === orchestratorId);
+  if (existing) return existing;
+  return {
+    id: orchestratorId,
+    role: "orchestrator",
+    model: orchestratorModel,
+    state: busy ? "running" : "queued",
+    detail: busy ? "thinking..." : "",
+    tokens: 0,
+    startedAt: Date.now(),
+  };
+}
+
+interface SliceResult {
+  start: number;
+  end: number;
+  hiddenAbove: number;
+  hiddenBelow: number;
+  showTopBar: boolean;
+  showBottomBar: boolean;
+}
+
+function sliceLineRange(total: number, height: number, scrollBack: number): SliceResult {
+  const viewport = Math.max(1, height);
+  const maxScrollBack = Math.max(0, total - viewport);
+  const back = Math.max(0, Math.min(scrollBack, maxScrollBack));
+  const end = total - back;
+  const showBottomBar = back > 0;
+
+  let chrome = showBottomBar ? 1 : 0;
+  let contentHeight = viewport - chrome;
+  let start = Math.max(0, end - contentHeight);
+  const showTopBar = back > 0 && start > 0;
+  if (showTopBar) {
+    contentHeight -= 1;
+    start = Math.max(0, end - contentHeight);
+  }
+
+  return { start, end, hiddenAbove: start, hiddenBelow: back, showTopBar, showBottomBar };
+}
+
+function AgentRow({ agent }: { agent: AgentView }) {
   return (
-    <Box flexDirection="column" paddingX={1}>
+    <Box flexDirection="column">
+      <Box>
+        {glyphFor(agent.state)}
+        <Text bold> {agent.id}</Text>
+        <Text dimColor> {elapsed(agent)}</Text>
+      </Box>
+      <Text dimColor wrap="truncate-end">
+        {"  "}
+        {agent.model} {"\u00B7"} {formatTokens(agent.tokens)} tok
+      </Text>
+      {agent.state === "running" && agent.detail.length > 0 && (
+        <Text color="blue" wrap="truncate-end">
+          {"  \u2514 "}
+          {agent.detail}
+        </Text>
+      )}
+    </Box>
+  );
+}
+
+function SubagentScroll({
+  agents,
+  height,
+  scrollBack,
+}: {
+  agents: AgentView[];
+  height: number;
+  scrollBack: number;
+}) {
+  if (agents.length === 0) {
+    return <Text dimColor>(no subagents)</Text>;
+  }
+
+  const lineOwners: AgentView[] = [];
+  for (const agent of agents) {
+    for (let i = 0; i < agentLineCount(agent); i++) lineOwners.push(agent);
+  }
+
+  const total = lineOwners.length;
+  const { start, end, hiddenAbove, hiddenBelow, showTopBar, showBottomBar } = sliceLineRange(
+    total,
+    height,
+    scrollBack
+  );
+  const pinBottom = scrollBack === 0;
+
+  const visibleAgents: AgentView[] = [];
+  const seen = new Set<string>();
+  for (let i = start; i < end; i++) {
+    const agent = lineOwners[i]!;
+    if (!seen.has(agent.id)) {
+      seen.add(agent.id);
+      visibleAgents.push(agent);
+    }
+  }
+
+  return (
+    <Box flexDirection="column" height={height} overflow="hidden">
+      {showTopBar && (
+        <Text dimColor>
+          {"\u2191"} {hiddenAbove} more {hiddenAbove === 1 ? "line" : "lines"} above
+        </Text>
+      )}
+      <Box
+        flexDirection="column"
+        flexGrow={1}
+        justifyContent={pinBottom ? "flex-end" : "flex-start"}
+        overflow="hidden"
+      >
+        {visibleAgents.map((agent) => (
+          <AgentRow key={agent.id} agent={agent} />
+        ))}
+      </Box>
+      {showBottomBar && (
+        <Text dimColor>
+          {"\u2193"} {hiddenBelow} more {hiddenBelow === 1 ? "line" : "lines"} below {"\u00B7"} Shift+End
+          for latest
+        </Text>
+      )}
+    </Box>
+  );
+}
+
+export function AgentStatus({
+  orchestratorId,
+  orchestratorModel,
+  agents,
+  busy,
+  height,
+  scrollBack,
+}: AgentStatusProps) {
+  const orchestrator = resolveOrchestrator(orchestratorId, orchestratorModel, agents, busy);
+  const subagents = agents
+    .filter((a) => a.id !== orchestratorId)
+    .sort((a, b) => a.startedAt - b.startedAt);
+
+  const headerLines = 1;
+  const orchestratorLines = agentLineCount(orchestrator);
+  const subHeaderLines = 1;
+  const subagentHeight = Math.max(
+    1,
+    height - headerLines - orchestratorLines - (subagents.length > 0 ? subHeaderLines : 0)
+  );
+
+  return (
+    <Box flexDirection="column" height={height} paddingX={1} overflow="hidden">
       <Text bold dimColor>
         AGENTS
       </Text>
-      {shown.length === 0 && <Text dimColor>(idle)</Text>}
-      {shown.map((agent) => (
-        <Box key={agent.id} flexDirection="column">
-          <Box>
-            {glyphFor(agent.state)}
-            <Text bold> {agent.id}</Text>
-            <Text dimColor> {elapsed(agent)}</Text>
-          </Box>
-          <Text dimColor wrap="truncate-end">
-            {"  "}
-            {agent.model} {"\u00B7"} {formatTokens(agent.tokens)} tok
-          </Text>
-          {agent.state === "running" && agent.detail.length > 0 && (
-            <Text color="blue" wrap="truncate-end">
-              {"  \u2514 "}
-              {agent.detail}
-            </Text>
-          )}
-        </Box>
-      ))}
+      <AgentRow agent={orchestrator} />
+      {subagents.length > 0 && (
+        <>
+          <Text dimColor>subagents</Text>
+          <SubagentScroll agents={subagents} height={subagentHeight} scrollBack={scrollBack} />
+        </>
+      )}
     </Box>
   );
 }

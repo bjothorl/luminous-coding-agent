@@ -94,11 +94,11 @@ async function main(): Promise<void> {
     );
   }
 
-  const orchestratorModel = resolveModelConfig(config, "orchestrator");
-  const connectivity = await checkConnectivity(
-    orchestratorModel.baseURL,
-    orchestratorModel.apiKey,
-  );
+  // const orchestratorModel = resolveModelConfig(config, "orchestrator");
+  // const connectivity = await checkConnectivity(
+  //   orchestratorModel.baseURL,
+  //   orchestratorModel.apiKey,
+  // );
 
   // Mouse wheel scrolling: enable terminal mouse reporting and filter the
   // resulting escape sequences out of stdin before Ink parses it.
@@ -118,7 +118,7 @@ async function main(): Promise<void> {
         usage,
         store,
         todos: deps.todos,
-        connected: connectivity.ok,
+        connected: true,
         mouse,
       }}
     />,

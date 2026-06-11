@@ -127,7 +127,7 @@ export abstract class BaseAgent {
           const [message] = payload as [BaseMessage, Record<string, unknown>];
           if (message instanceof AIMessageChunk || message.getType?.() === "ai") {
             const text = textOf(message);
-            if (text) bus.emit({ type: "agent:token", agentId: this.id, text });
+            if (text) bus.emit({ type: "agent:token", agentId: this.id, role: this.role, text });
             const usage = (message as AIMessageChunk).usage_metadata;
             if (usage) {
               tokensIn += usage.input_tokens ?? 0;

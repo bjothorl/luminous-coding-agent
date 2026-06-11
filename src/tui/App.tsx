@@ -86,6 +86,14 @@ export function App({ services }: { services: AppServices }) {
     });
   }, []);
 
+  const agentScrollByLines = useCallback((delta: number) => {
+    setAgentScrollBack((prev) => {
+      const { totalLines, viewportLines } = agentScrollMetricsRef.current;
+      const max = Math.max(0, totalLines - viewportLines);
+      return Math.max(0, Math.min(max, prev + delta));
+    });
+  }, []);
+
   const addChat = useCallback((item: Omit<ChatItem, "id">) => {
     const id = ++chatSeq;
     setChatItems((prev) => [...prev, { ...item, id }]);
@@ -159,13 +167,13 @@ export function App({ services }: { services: AppServices }) {
               model: event.model,
               state: "running",
               detail: "thinking...",
+              contextTokens: 0,
               tokens: 0,
               startedAt: Date.now(),
             });
             return next;
           });
           if (event.agentId !== orchestratorId) {
-            setAgentScrollBack(0);
             const brief = event.task.length > 80 ? `${event.task.slice(0, 80)}...` : event.task;
             addChat({
               kind: "subagent",
@@ -249,6 +257,16 @@ export function App({ services }: { services: AppServices }) {
           });
           break;
         }
+        case "agent:context": {
+          setAgents((prev) => {
+            const existing = prev.get(event.agentId);
+            if (!existing) return prev;
+            const next = new Map(prev);
+            next.set(event.agentId, { ...existing, contextTokens: event.tokens });
+            return next;
+          });
+          break;
+        }
         case "agent:done": {
           setAgents((prev) => {
             const existing = prev.get(event.agentId);
@@ -328,28 +346,26 @@ export function App({ services }: { services: AppServices }) {
       return;
     }
     if (key.shift && key.upArrow) {
-      setAgentScrollBack((prev) => prev + ARROW_SCROLL_LINES);
+      agentScrollByLines(-ARROW_SCROLL_LINES);
       return;
     }
     if (key.shift && key.downArrow) {
-      setAgentScrollBack((prev) => Math.max(0, prev - ARROW_SCROLL_LINES));
+      agentScrollByLines(ARROW_SCROLL_LINES);
       return;
     }
     if (key.shift && key.pageUp) {
-      setAgentScrollBack((prev) => prev + agentScrollMetricsRef.current.viewportLines);
+      agentScrollByLines(-agentScrollMetricsRef.current.viewportLines);
       return;
     }
     if (key.shift && key.pageDown) {
-      setAgentScrollBack((prev) =>
-        Math.max(0, prev - agentScrollMetricsRef.current.viewportLines)
-      );
-      return;
-    }
-    if (key.shift && key.end) {
-      setAgentScrollBack(0);
+      agentScrollByLines(agentScrollMetricsRef.current.viewportLines);
       return;
     }
     if (key.shift && key.home) {
+      setAgentScrollBack(0);
+      return;
+    }
+    if (key.shift && key.end) {
       const { totalLines, viewportLines } = agentScrollMetricsRef.current;
       setAgentScrollBack(Math.max(0, totalLines - viewportLines));
       return;
@@ -490,6 +506,7 @@ export function App({ services }: { services: AppServices }) {
 
   const agentViews = useMemo(() => [...agents.values()], [agents]);
   const orchestratorModel = resolveModelConfig(config, "orchestrator").model;
+  const orchestratorContextTokens = orchestrator.contextTokenEstimate();
 
   const rows = stdout?.rows ?? 35;
   const columns = stdout?.columns ?? 100;
@@ -508,6 +525,7 @@ export function App({ services }: { services: AppServices }) {
       model: orchestratorModel,
       state: busy ? "running" : "queued",
       detail: busy ? "thinking..." : "",
+      contextTokens: orchestratorContextTokens,
       tokens: 0,
       startedAt: 0,
     }
@@ -561,6 +579,7 @@ export function App({ services }: { services: AppServices }) {
           <AgentStatus
             orchestratorId={orchestrator.id}
             orchestratorModel={orchestratorModel}
+            orchestratorContextTokens={orchestratorContextTokens}
             agents={agentViews}
             busy={busy}
             height={agentStatusHeight}

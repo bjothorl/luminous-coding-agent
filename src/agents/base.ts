@@ -10,6 +10,7 @@ import { resolveModelConfig } from "../config/index.js";
 import { createChatModel } from "../providers/index.js";
 import type { ApprovalService } from "../session/approvals.js";
 import type { FileClaimRegistry } from "../session/claims.js";
+import { estimateContextTokens } from "../session/context.js";
 import type { SessionBus } from "../session/events.js";
 import type { TodoStore } from "../session/todo.js";
 import type { LuminousTool, ToolContext } from "../tools/base.js";
@@ -79,6 +80,11 @@ export abstract class BaseAgent {
     this.history = [];
   }
 
+  /** Estimated tokens in persisted history plus the system prompt. */
+  contextTokenEstimate(): number {
+    return estimateContextTokens(this.history, this.systemPrompt());
+  }
+
   async run(task: string, options: RunOptions = {}): Promise<TaskReport> {
     const { bus, config, cwd } = this.deps;
     const modelCfg = resolveModelConfig(config, this.role);
@@ -105,7 +111,17 @@ export abstract class BaseAgent {
 
     bus.emit({ type: "agent:start", agentId: this.id, role: this.role, model: modelCfg.model, task });
 
+    const systemPrompt = this.systemPrompt();
+    const reportContext = (messages: BaseMessage[]) => {
+      bus.emit({
+        type: "agent:context",
+        agentId: this.id,
+        tokens: estimateContextTokens(messages, systemPrompt),
+      });
+    };
+
     const inputMessages = [...this.history, new HumanMessage(task)];
+    reportContext(inputMessages);
     let tokensIn = 0;
     let tokensOut = 0;
     let finalMessages: BaseMessage[] = [];
@@ -142,7 +158,10 @@ export abstract class BaseAgent {
           }
         } else if (mode === "values") {
           const state = payload as { messages?: BaseMessage[] };
-          if (state.messages) finalMessages = state.messages;
+          if (state.messages) {
+            finalMessages = state.messages;
+            reportContext(state.messages);
+          }
         }
       }
     } catch (err) {
@@ -164,6 +183,7 @@ export abstract class BaseAgent {
     } else {
       this.history = inputMessages;
     }
+    reportContext(this.history);
 
     const lastAi = [...finalMessages].reverse().find((m) => m.getType() === "ai");
     const summary = lastAi ? textOf(lastAi) : "";

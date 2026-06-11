@@ -10,6 +10,9 @@ export interface AgentView {
   model: string;
   state: AgentRuntimeState;
   detail: string;
+  /** Estimated prompt context size (history + tools + system). */
+  contextTokens: number;
+  /** Cumulative API tokens consumed this run. */
   tokens: number;
   startedAt: number;
   endedAt?: number;
@@ -18,10 +21,12 @@ export interface AgentView {
 export interface AgentStatusProps {
   orchestratorId: string;
   orchestratorModel: string;
+  /** Context estimate when the orchestrator is idle (not in the agent map). */
+  orchestratorContextTokens: number;
   agents: AgentView[];
   busy: boolean;
   height: number;
-  /** Lines scrolled up from the bottom of the subagent list (0 = pinned to latest). */
+  /** Lines scrolled down from the top of the subagent list (0 = pinned to start). */
   scrollBack: number;
 }
 
@@ -63,6 +68,7 @@ export function countSubagentLines(agents: AgentView[], orchestratorId: string):
 function resolveOrchestrator(
   orchestratorId: string,
   orchestratorModel: string,
+  orchestratorContextTokens: number,
   agents: AgentView[],
   busy: boolean
 ): AgentView {
@@ -74,6 +80,7 @@ function resolveOrchestrator(
     model: orchestratorModel,
     state: busy ? "running" : "queued",
     detail: busy ? "thinking..." : "",
+    contextTokens: orchestratorContextTokens,
     tokens: 0,
     startedAt: Date.now(),
   };
@@ -88,23 +95,24 @@ interface SliceResult {
   showBottomBar: boolean;
 }
 
+/** View a window of `height` lines, scrolled `scrollBack` lines down from the top. */
 function sliceLineRange(total: number, height: number, scrollBack: number): SliceResult {
   const viewport = Math.max(1, height);
   const maxScrollBack = Math.max(0, total - viewport);
   const back = Math.max(0, Math.min(scrollBack, maxScrollBack));
-  const end = total - back;
-  const showBottomBar = back > 0;
+  const start = back;
+  const showTopBar = back > 0;
 
-  let chrome = showBottomBar ? 1 : 0;
+  let chrome = showTopBar ? 1 : 0;
   let contentHeight = viewport - chrome;
-  let start = Math.max(0, end - contentHeight);
-  const showTopBar = back > 0 && start > 0;
-  if (showTopBar) {
+  let end = Math.min(total, start + contentHeight);
+  const showBottomBar = end < total;
+  if (showBottomBar) {
     contentHeight -= 1;
-    start = Math.max(0, end - contentHeight);
+    end = Math.min(total, start + contentHeight);
   }
 
-  return { start, end, hiddenAbove: start, hiddenBelow: back, showTopBar, showBottomBar };
+  return { start, end, hiddenAbove: back, hiddenBelow: total - end, showTopBar, showBottomBar };
 }
 
 function AgentRow({ agent }: { agent: AgentView }) {
@@ -117,7 +125,8 @@ function AgentRow({ agent }: { agent: AgentView }) {
       </Box>
       <Text dimColor wrap="truncate-end">
         {"  "}
-        {agent.model} {"\u00B7"} {formatTokens(agent.tokens)} tok
+        {agent.model} {"\u00B7"} {formatTokens(agent.contextTokens)} ctx {"\u00B7"}{" "}
+        {formatTokens(agent.tokens)} used
       </Text>
       {agent.state === "running" && agent.detail.length > 0 && (
         <Text color="blue" wrap="truncate-end">
@@ -153,8 +162,6 @@ function SubagentScroll({
     height,
     scrollBack
   );
-  const pinBottom = scrollBack === 0;
-
   const visibleAgents: AgentView[] = [];
   const seen = new Set<string>();
   for (let i = start; i < end; i++) {
@@ -172,12 +179,7 @@ function SubagentScroll({
           {"\u2191"} {hiddenAbove} more {hiddenAbove === 1 ? "line" : "lines"} above
         </Text>
       )}
-      <Box
-        flexDirection="column"
-        flexGrow={1}
-        justifyContent={pinBottom ? "flex-end" : "flex-start"}
-        overflow="hidden"
-      >
+      <Box flexDirection="column" flexGrow={1} justifyContent="flex-start" overflow="hidden">
         {visibleAgents.map((agent) => (
           <AgentRow key={agent.id} agent={agent} />
         ))}
@@ -195,12 +197,19 @@ function SubagentScroll({
 export function AgentStatus({
   orchestratorId,
   orchestratorModel,
+  orchestratorContextTokens,
   agents,
   busy,
   height,
   scrollBack,
 }: AgentStatusProps) {
-  const orchestrator = resolveOrchestrator(orchestratorId, orchestratorModel, agents, busy);
+  const orchestrator = resolveOrchestrator(
+    orchestratorId,
+    orchestratorModel,
+    orchestratorContextTokens,
+    agents,
+    busy
+  );
   const subagents = agents
     .filter((a) => a.id !== orchestratorId)
     .sort((a, b) => a.startedAt - b.startedAt);

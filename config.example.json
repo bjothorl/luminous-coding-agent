@@ -1,0 +1,14 @@
+{
+  "baseURL": "http://localhost:8080/v1",
+  "apiKey": "sk-local",
+  "model": "qwen3-32b",
+  "temperature": 0.2,
+  "maxSteps": 80,
+  "lintCommand": "npx tsc --noEmit",
+  "agents": {
+    "orchestrator": { "model": "qwen3-32b", "temperature": 0.3 },
+    "explorer": { "model": "qwen3-8b" },
+    "coder": { "model": "qwen3-14b", "temperature": 0.1 },
+    "reviewer": { "baseURL": "http://localhost:8081/v1", "model": "qwen3-32b" }
+  }
+}

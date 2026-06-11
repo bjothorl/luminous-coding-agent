@@ -1,0 +1,2797 @@
+<tbody>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Read</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Reads a file from the local filesystem. You can access any file
+            directly by using this tool. If the User provides a path to a file
+            assume that path is valid. It is okay to read a file that does not
+            exist; an error will be returned. Usage: - You can optionally
+            specify a line offset and limit (especially handy for long files),
+            but it's recommended to read the whole file by not providing these
+            parameters - Lines in the output are numbered starting at 1, using
+            following format: LINE_NUMBER|LINE_CONTENT - You have the capability
+            to call multiple tools in a single response. It is always better to
+            speculatively read multiple files as a batch that are potentially
+            useful. - If you read a file that exists but has empty contents you
+            will receive 'File is empty.' Image Support: - This tool can also
+            read image files when called with the appropriate path. - Supported
+            image formats: jpeg/jpg, png, gif, webp. PDF Support: - PDF files
+            are converted into text content automatically (subject to the same
+            character limits as other files).
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">234</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">132 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">68 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">34 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">160</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">76 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">56 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">28 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.46</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.74 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.21 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.21 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 39.2%"></div>
+              </div>
+              <span class="tc-bar-label">39.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">56.4%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">29.1%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">14.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Shell</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Executes a given command in a shell session with optional foreground
+            timeout. IMPORTANT: This tool is for terminal operations like git,
+            npm, docker, etc. DO NOT use it for file operations (reading,
+            writing, editing, searching, finding files) - use the specialized
+            tools for this instead. Before executing the command, please follow
+            these steps: 1. Check for Running Processes: - Before starting dev
+            servers or long-running processes that should not be duplicated,
+            list the terminals folder to check if they are already running in
+            existing terminals. - You can use this information to determine
+            which terminal, if any, matches the command you want to run,
+            contains the output from the command you want to inspect, or has
+            changed since you last read them. - Since these are text files, you
+            can read any terminal's contents simply by reading the file, search
+            using Grep, etc. 2. Directory Verification: - If the command will
+            create new directories or files, first run ls to verify the parent
+            directory exists and is the correct location - For example, before
+            running "mkdir foo/bar", first run 'ls' to check that "foo" exists
+            and is the intended parent directory 3. Command Execution: - Always
+            quote file paths that contain spaces with double quotes (e.g., cd
+            "path with spaces/file.txt") - Examples of proper quoting: - cd
+            "/Users/name/My Documents" (correct) - cd /Users/name/My Documents
+            (incorrect - will fail) - python "/path/with spaces/script.py"
+            (correct) - python /path/with spaces/script.py (incorrect - will
+            fail) - After ensuring proper quoting, execute the command. -
+            Capture the output of the command. Usage notes: - The command
+            argument is required. - The shell starts in the workspace root and
+            is stateful across sequential calls. Current working directory and
+            environment variables persist between calls. Use the
+            `working_directory` parameter to run commands in different
+            directories. Example: to run `npm install` in the `frontend` folder,
+            set `working_directory: "frontend"` rather than using `cd frontend
+            &amp;&amp; npm install`. - It is very helpful if you write a clear,
+            concise description of what this command does in 5-10 words. - VERY
+            IMPORTANT: You MUST avoid using search commands like `find` and
+            `grep`.Instead use Grep, Glob to search.You MUST avoid read tools
+            like `cat`, `head`, and `tail`, and use Read to read files.Avoid
+            editing files with tools like `sed` and `awk`, use StrReplace
+            instead. - If you _still_ need to run `grep`, STOP. ALWAYS USE
+            ripgrep at `rg` first, which all users have pre-installed. - When
+            issuing multiple commands: - If the commands are independent and can
+            run in parallel, make multiple Shell tool calls in a single message.
+            For example, if you need to run "git status" and "git diff", send a
+            single message with two Shell tool calls in parallel. - If the
+            commands depend on each other and must run sequentially, use a
+            single Shell call with '&amp;&amp;' to chain them together (e.g.,
+            `git add . &amp;&amp; git commit -m "message" &amp;&amp; git push`).
+            For instance, if one operation must complete before another starts
+            (like mkdir before cp,Write before Shell for git operations, or git
+            add before git commit), run these operations sequentially instead. -
+            Use ';' only when you need to run commands sequentially but don't
+            care if earlier commands fail - DO NOT use newlines to separate
+            commands (newlines are ok in quoted strings) Dependencies: When
+            adding new dependencies, prefer using the package manager (e.g. npm,
+            pip) to add the latest version. Do not make up dependency versions.
+            &lt;managing-long-running-commands&gt; - Commands that don't
+            complete within `block_until_ms` (default 30000ms / 30 seconds) are
+            moved to background. The command keeps running and output streams to
+            a terminal file. Set `block_until_ms: 0` to immediately background
+            (use for dev servers, watchers, or any long-running process). - You
+            do not need to use '&amp;' at the end of commands. - Make sure to
+            set `block_until_ms` to higher than the command's expected runtime.
+            Add some buffer since block_until_ms includes shell startup time;
+            increase buffer next time based on `elapsed_ms` if you chose too
+            low. E.g. if you sleep for 40s, recommended `block_until_ms` is 45s.
+            - You'll be notified when the backgrounded command completes. Only
+            poll with `AwaitShell` when the command requires close monitoring —
+            long-running jobs that can silently hang or degrade before
+            completing (training runs, eval runs, deployments, long builds,
+            datagen pipelines, DB migrations, large data transfers). For
+            fire-and-forget commands (tests, installs, dev servers/watchers,
+            short scripts), start them and keep working — you can always poll
+            with `AwaitShell` later if you end up blocked on the result. If
+            under your control, prefer commands that print periodic status
+            updates so close monitoring is effective.
+            &lt;/managing-long-running-commands&gt;
+            &lt;committing-changes-with-git&gt; Only create commits when
+            requested by the user. If unclear, ask first. When the user asks you
+            to create a new git commit, follow these steps carefully: Git Safety
+            Protocol: - NEVER update the git config - NEVER run
+            destructive/irreversible git commands (like push --force, hard
+            reset, etc) unless the user explicitly requests them - NEVER skip
+            hooks (--no-verify, --no-gpg-sign, etc) unless the user explicitly
+            requests it - NEVER run force push to main/master, warn the user if
+            they request it - Avoid git commit --amend. ONLY use --amend when
+            ALL conditions are met: 1. User explicitly requested amend, OR
+            commit SUCCEEDED but pre-commit hook auto-modified files that need
+            including 2. HEAD commit was created by you in this conversation
+            (verify: git log -1 --format='%an %ae') 3. Commit has NOT been
+            pushed to remote (verify: git status shows "Your branch is ahead") -
+            CRITICAL: If commit FAILED or was REJECTED by hook, NEVER amend -
+            fix the issue and create a NEW commit - CRITICAL: If you already
+            pushed to remote, NEVER amend unless the user explicitly requests it
+            (requires force push) - NEVER commit changes unless the user
+            explicitly asks you to. It is VERY IMPORTANT to only commit when
+            explicitly asked, otherwise the user will feel that you are being
+            too proactive. 1. You can call multiple tools in a single response.
+            When multiple independent pieces of information are requested, batch
+            your tool calls together for optimal performance. ALWAYS run the
+            following shell commands in parallel, each using the Shell tool: -
+            Run a git status command to see all untracked files. - Run a git
+            diff command to see both staged and unstaged changes that will be
+            committed. - Run a git log command to see recent commit messages, so
+            that you can follow this repository's commit message style. 2.
+            Analyze all staged changes (both previously staged and newly added)
+            and draft a commit message: - Summarize the nature of the changes
+            (eg. new feature, enhancement to an existing feature, bug fix,
+            refactoring, test, docs, etc.). Ensure the message accurately
+            reflects the changes and their purpose (i.e. "add" means a wholly
+            new feature, "update" means an enhancement to an existing feature,
+            "fix" means a bug fix, etc.). - Do not commit files that likely
+            contain secrets (.env, credentials.json, etc). Warn the user if they
+            specifically request to commit those files - Draft a concise (1-2
+            sentences) commit message that focuses on the "why" rather than the
+            "what" - Ensure it accurately reflects the changes and their purpose
+            3. Run the following commands sequentially: - Add relevant untracked
+            files to the staging area. - Commit the changes with the message. -
+            Run git status after the commit completes to verify success. 4. If
+            the commit fails due to pre-commit hook, fix the issue and create a
+            NEW commit (see amend rules above) Important notes: - NEVER update
+            the git config - NEVER run additional commands to read or explore
+            code, besides git shell commands - DO NOT push to the remote
+            repository unless the user explicitly asks you to do so - IMPORTANT:
+            Never use git commands with the -i flag (like git rebase -i or git
+            add -i) since they require interactive input which is not supported.
+            - If there are no changes to commit (i.e., no untracked files and no
+            modifications), do not create an empty commit - In order to ensure
+            good formatting, ALWAYS pass the commit message via a HEREDOC, a la
+            this example: &lt;example&gt;git commit -m "$(cat &lt;&lt;'EOF'
+            Commit message here. EOF )"&lt;/example&gt;
+            &lt;/committing-changes-with-git&gt; &lt;creating-pull-requests&gt;
+            Use the gh command via the Shell tool for ALL GitHub-related tasks
+            including working with issues, pull requests, checks, and releases.
+            If given a Github URL use the gh command to get the information
+            needed. IMPORTANT: When the user asks you to create a pull request,
+            follow these steps carefully: 1. You have the capability to call
+            multiple tools in a single response. When multiple independent
+            pieces of information are requested, batch your tool calls together
+            for optimal performance. ALWAYS run the following shell commands in
+            parallel using the Shell tool, in order to understand the current
+            state of the branch since it diverged from the main branch: - Run a
+            git status command to see all untracked files - Run a git diff
+            command to see both staged and unstaged changes that will be
+            committed - Check if the current branch tracks a remote branch and
+            is up to date with the remote, so you know if you need to push to
+            the remote - Run a git log command and `git diff
+            [base-branch]...HEAD` to understand the full commit history for the
+            current branch (from the time it diverged from the base branch) 2.
+            Analyze all changes that will be included in the pull request,
+            making sure to look at all relevant commits (NOT just the latest
+            commit, but ALL commits that will be included in the pull
+            request!!!), and draft a pull request summary 3. Run the following
+            commands sequentially: - Create new branch if needed - Push to
+            remote with -u flag if needed - Create PR using gh pr create with
+            the format below. Use a HEREDOC to pass the body to ensure correct
+            formatting. &lt;example&gt;# First, push the branch (with
+            required_permissions: ["all"]) git push -u origin HEAD # Then create
+            the PR (with required_permissions: ["all"]) gh pr create --title
+            "the pr title" --body "$(cat &lt;&lt;'EOF' ## Summary &lt;1-3 bullet
+            points&gt; ## Test plan [Checklist of TODOs for testing the pull
+            request...] EOF )"&lt;/example&gt; Important: - NEVER update the git
+            config - DO NOT use the TodoWrite or Task tools - Return the PR URL
+            when you're done, so the user can see it
+            &lt;/creating-pull-requests&gt; &lt;other-common-operations&gt; -
+            View comments on a Github PR: gh api
+            repos/foo/bar/pulls/123/comments &lt;/other-common-operations&gt;
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">90</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">46 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">43 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">57</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">32 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">24 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.58</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.44 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.79 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 15.1%"></div>
+              </div>
+              <span class="tc-bar-label">15.1%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">51.1%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">47.8%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">1.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Grep</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            A powerful search tool built on ripgrep Usage: - Prefer using Grep
+            for search tasks when you know the exact symbols or strings to
+            search for. Whenever possible, use this tool instead of invoking
+            grep or rg as a terminal command. The Grep tool has been optimized
+            for speed and file restrictions inside Cursor. - Supports full regex
+            syntax (e.g., "log.*Error", "function\s+\w+") - Filter files with
+            glob parameter (e.g., ".js", "**/.tsx") or type parameter (e.g.,
+            "js", "py", "rust") - Output modes: "content" shows matching lines
+            (default), "files_with_matches" shows only file paths, "count" shows
+            match counts - Pattern syntax: Uses ripgrep (not grep) - literal
+            braces need escaping (use interface\{\} to find interface{} in Go
+            code) - Multiline matching: By default patterns match within single
+            lines only. For cross-line patterns like struct \{[\s\S]*?field, use
+            multiline: true - Results are capped to several thousand output
+            lines for responsiveness; when truncation occurs, the results report
+            "at least" counts, but are otherwise accurate. - Content output
+            formatting closely follows ripgrep output format: '-' for context
+            lines, ':' for match lines, and all context/match lines below each
+            file group.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">74</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">31 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">23 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">20 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">59</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">25 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">20 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">14 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.25</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.24 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.15 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.43 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 12.4%"></div>
+              </div>
+              <span class="tc-bar-label">12.4%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">41.9%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">31.1%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">27.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">StrReplace</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Performs exact string replacements in files. Usage: - When editing
+            text, ensure you preserve the exact indentation (tabs/spaces) as it
+            appears before. - Only use emojis if the user explicitly requests
+            it. Avoid adding emojis to files unless asked. - The edit will FAIL
+            if old_string is not unique in the file. Either provide a larger
+            string with more surrounding context to make it unique or use
+            replace_all to change every instance of old_string. - Use
+            replace_all for replacing and renaming strings across the file. This
+            parameter is useful if you want to rename a variable for instance. -
+            Optional parameter: replace_all (boolean, default false) — if true,
+            replaces all occurrences of old_string in the file. If you want to
+            create a new file, use the Write tool instead.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">55</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">47 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">8 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">48</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">40 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">8 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.15</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.18 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">2 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 9.2%"></div>
+              </div>
+              <span class="tc-bar-label">9.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">85.5%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">14.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">TodoWrite</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Use this tool to create and manage a structured task list for your
+            current coding session. This helps track progress, organize complex
+            tasks, and demonstrate thoroughness. Note: Other than when first
+            creating todos, don't tell the user you're updating todos, just do
+            it. ### When to Use This Tool Use proactively for: 1. Complex
+            multi-step tasks (3+ distinct steps) 2. Non-trivial tasks requiring
+            careful planning 3. User explicitly requests todo list 4. User
+            provides multiple tasks (numbered/comma-separated) 5. After
+            receiving new instructions - capture requirements as todos (use
+            merge=false to add new ones) 6. After completing tasks - mark
+            complete with merge=true and add follow-ups 7. When starting new
+            tasks - mark as in_progress (ideally only one at a time) ### When
+            NOT to Use Skip for: 1. Single, straightforward tasks 2. Trivial
+            tasks with no organizational benefit 3. Tasks completable in &lt; 3
+            trivial steps 4. Purely conversational/informational requests 5.
+            Don't add a task to test the change unless asked, or you'll
+            overfocus on testing ### Examples &lt;example&gt; User: Add dark
+            mode toggle to settings Assistant: - *Creates todo list:* 1. Add
+            state management [in_progress] 2. Implement styles 3. Create toggle
+            component 4. Update components - [Immediately begins working on todo
+            1 in the same tool call batch] &lt;reasoning&gt; Multi-step feature
+            with dependencies. &lt;/reasoning&gt; &lt;/example&gt;
+            &lt;example&gt; User: Rename getCwd to getCurrentWorkingDirectory
+            across my project Assistant: *Searches codebase, finds 15 instances
+            across 8 files* *Creates todo list with specific items for each file
+            that needs updating* &lt;reasoning&gt; Complex refactoring requiring
+            systematic tracking across multiple files. &lt;/reasoning&gt;
+            &lt;/example&gt; &lt;example&gt; User: Implement user registration,
+            product catalog, shopping cart, checkout flow. Assistant: *Creates
+            todo list breaking down each feature into specific tasks*
+            &lt;reasoning&gt; Multiple complex features provided as list
+            requiring organized task management. &lt;/reasoning&gt;
+            &lt;/example&gt; &lt;example&gt; User: Optimize my React app - it's
+            rendering slowly. Assistant: *Analyzes codebase, identifies issues*
+            *Creates todo list: 1) Memoization, 2) Virtualization, 3) Image
+            optimization, 4) Fix state loops, 5) Code splitting*
+            &lt;reasoning&gt; Performance optimization requires multiple steps
+            across different components. &lt;/reasoning&gt; &lt;/example&gt; ###
+            Examples of When NOT to Use the Todo List &lt;example&gt; User: What
+            does git status do? Assistant: Shows current state of working
+            directory and staging area... &lt;reasoning&gt; Informational
+            request with no coding task to complete. &lt;/reasoning&gt;
+            &lt;/example&gt; &lt;example&gt; User: Add comment to calculateTotal
+            function. Assistant: *Uses edit tool to add comment*
+            &lt;reasoning&gt; Single straightforward task in one location.
+            &lt;/reasoning&gt; &lt;/example&gt; &lt;example&gt; User: Run npm
+            install for me. Assistant: *Executes npm install* Command completed
+            successfully... &lt;reasoning&gt; Single command execution with
+            immediate results. &lt;/reasoning&gt; &lt;/example&gt; ### Task
+            States and Management 1. **Task States:** - pending: Not yet started
+            - in_progress: Currently working on - completed: Finished
+            successfully - cancelled: No longer needed 2. **Task Management:** -
+            Update status in real-time - Mark complete IMMEDIATELY after
+            finishing - Only ONE task in_progress at a time - Complete current
+            tasks before starting new ones 3. **Task Breakdown:** - Create
+            specific, actionable items - Break complex tasks into manageable
+            steps - Use clear, descriptive names 4. **Parallel Todo Writes:** -
+            Prefer creating the first todo as in_progress - Start working on
+            todos by using tool calls in the same tool call batch as the todo
+            write - Batch todo updates with other tool calls for better latency
+            and lower costs for the user When in doubt, use this tool. Proactive
+            task management demonstrates attentiveness and ensures complete
+            requirements.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">42</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">35 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">7 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">42</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">35 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">7 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">2 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 7%"></div>
+              </div>
+              <span class="tc-bar-label">7.0%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">83.3%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">16.7%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Glob</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Tool to search for files matching a glob pattern - Works fast with
+            codebases of any size - Returns matching file paths sorted by
+            modification time - Use this tool when you need to find files by
+            name patterns - You have the capability to call multiple tools in a
+            single response. It is always better to speculatively perform
+            multiple searches that are potentially useful as a batch.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">31</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">22 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">8 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">18</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">12 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">5 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.72</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.83 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.60 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 5.2%"></div>
+              </div>
+              <span class="tc-bar-label">5.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">71.0%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">25.8%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">3.2%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Task</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Launch a new agent to handle complex, multi-step tasks autonomously.
+            The Task tool launches specialized subagents (subprocesses) that
+            autonomously handle complex tasks. Each subagent_type has specific
+            capabilities and tools available to it. When using the Task tool,
+            you must specify a subagent_type parameter to select which agent
+            type to use. VERY IMPORTANT: When broadly exploring the codebase to
+            gather context for a large task, it is recommended that you use the
+            Task tool with subagent_type="explore" instead of running search
+            commands directly. If the query is a narrow or specific question,
+            you should NOT use the Task and instead address the query directly
+            using the other tools available to you. Examples: - user: "Where is
+            the ClientError class defined?" assistant: [Uses Grep directly -
+            this is a needle query for a specific class] - user: "Run this query
+            using my database API" assistant: [Calls the MCP directly - this is
+            not a broad exploration task] - user: "What is the codebase
+            structure?" assistant: [Uses the Task tool with
+            subagent_type="explore"] If it is possible to explore different
+            areas of the codebase in parallel, you should launch multiple agents
+            concurrently. When NOT to use the Task tool: - Simple, single or
+            few-step tasks that can be performed by a single agent (using
+            parallel or sequential tool calls) -- just call the tools directly
+            instead. - For example: - If you want to read a specific file path,
+            use the Read or Glob tool instead of the Task tool, to find the
+            match more quickly - If you are searching for code within a specific
+            file or set of 2-3 files, use the Read tool instead of the Task
+            tool, to find the match more quickly - If you are searching for a
+            specific class definition like "class Foo", use the Glob tool
+            instead, to find the match more quickly Usage notes: - Always
+            include a short description (3-5 words) summarizing what the agent
+            will do - Launch multiple agents concurrently whenever possible, to
+            maximize performance; to do that, use a single message with multiple
+            tool uses. - When the agent is done, it will return a single message
+            back to you. Specify exactly what information the agent should
+            return back in its final response to you. Background subagent
+            completion messages already include a user-visible summary portion;
+            do not summarize or restate a single background subagent's result by
+            default. Respond only when the user asks, multiple background
+            subagents need synthesis, or a background subagent reports a blocker
+            requiring parent action outside of the user-visible high level
+            summary. - Agents can be resumed using the `resume` parameter by
+            passing the agent ID from a previous invocation. This sends a
+            follow-up message after the agent has completed, preserving existing
+            context. If the agent is still running, the request fails unless
+            `interrupt` is true. Set `interrupt` to true only when the user
+            explicitly wants to interrupt the running agent. You can also set
+            `resume` to "self" to fork the current parent agent into a new child
+            subagent. When NOT resuming, each invocation starts fresh and you
+            should provide a detailed task description with all necessary
+            context. - When using the Task tool, the subagent invocation does
+            not have access to the user's message or prior assistant steps.
+            Therefore, you should provide a highly detailed task description
+            with all necessary context for the agent to perform its task
+            autonomously. - The subagent's outputs should generally be trusted -
+            Clearly tell the subagent which tasks you want it to perform, since
+            it is not aware of the user's intent or your prior assistant steps
+            (tool calls, thinking, or messages). - If the subagent description
+            mentions that it should be used proactively, then you should try
+            your best to use it without the user having to ask for it first. Use
+            your judgement. - If the user specifies that they want you to run
+            subagents "in parallel", you MUST send a single message with
+            multiple Task tool use content blocks. For example, if you need to
+            launch both a code-reviewer subagent and a test-runner subagent in
+            parallel, send a single message with both tool calls. - Avoid
+            delegating the full query to the Task tool and returning the result.
+            In these cases, you should address the query using the other tools
+            available to you. Available subagent_types and a quick description
+            of what they do: - generalPurpose: General-purpose agent for
+            researching complex questions, searching for code, and executing
+            multi-step tasks. Use when searching for a keyword or file and not
+            confident you'll find the match quickly. - explore: Fast, readonly
+            agent specialized for exploring codebases. Use this when you need to
+            quickly find files by patterns (eg. "src/components/**/*.tsx"),
+            search code for keywords (eg. "API endpoints"), or answer questions
+            about the codebase (eg. "how do API endpoints work?"). This agent
+            operates in read-only mode and cannot modify files. When calling
+            this agent, specify the desired thoroughness level: "quick" for
+            basic searches, "medium" for moderate exploration, or "very
+            thorough" for comprehensive analysis across multiple locations and
+            naming conventions. - shell: Command execution specialist for
+            running bash commands. Use this for git operations, command
+            execution, and other terminal tasks. - cursor-guide: Read Cursor
+            product documentation to answer questions about how Cursor Desktop,
+            IDE, CLI, Cloud Agents, Bugbot, and other features work. Use when
+            the user asks 'In Cursor, how do I...?' or similar questions about
+            Cursor products. - ci-investigator: Investigate a single failing PR
+            CI check and return a short root-cause summary. Use when the user
+            asks to summarize, explain, diagnose, or investigate a specific
+            failed check from a pull request. - best-of-n-runner: Run a task in
+            an isolated git worktree. Each best-of-n-runner gets its own branch
+            and working directory. Use for best-of-N parallel attempts or
+            isolated experiments. If the user explicitly asks for the model of a
+            subagent/task, you may ONLY use model slugs from this list: -
+            composer-2.5-fast If the user isn't asking for a specific version,
+            prefer the latest version of the model family. As an example, if the
+            user just says "gpt" or "codex", use the latest available version of
+            GPT or Codex. IMPORTANT: If the user requests a model that is NOT in
+            the list above, do NOT substitute a different model or guess.
+            Instead, skip launching the subagent with that model and tell the
+            user which model was unavailable and which models are available.
+            When speaking to the USER about which model you selected for a
+            subagent, do NOT use the kebab-case model names unless the user
+            requested the model using that format. Ue the same naming scheme the
+            user used to discuss the model when they requested it. When an agent
+            runs in the background, you will be automatically notified when it
+            completes - do NOT AwaitShell, poll, or proactively check on its
+            progress. Continue with other work or respond to the user instead.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">18</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">16 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">13</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">11 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.38</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.45 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">2 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 3%"></div>
+              </div>
+              <span class="tc-bar-label">3.0%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">88.9%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">11.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Write</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Writes a file to the local filesystem. Usage: - This tool will
+            overwrite the existing file if there is one at the provided path. -
+            ALWAYS prefer editing existing files in the codebase. NEVER write
+            new files unless explicitly required. - NEVER proactively create
+            documentation files (*.md) or README files. Only create
+            documentation files if explicitly requested by the User.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">12</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">12 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">12</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">12 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">1 model</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 2%"></div>
+              </div>
+              <span class="tc-bar-label">2.0%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">100.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">ReadLints</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Read and display linter errors from the current workspace. You can
+            provide paths to specific files or directories, or omit the argument
+            to get diagnostics for all files. - If a file path is provided,
+            returns diagnostics for that file only - If a directory path is
+            provided, returns diagnostics for all files within that directory -
+            If no path is provided, returns diagnostics for all files in the
+            workspace - This tool can return linter errors that were already
+            present before your edits, so avoid calling it with a very wide
+            scope of files - NEVER call this tool on a file unless you've edited
+            it or are about to edit it
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">11</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">5 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">4 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">11</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">5 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">4 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 1.8%"></div>
+              </div>
+              <span class="tc-bar-label">1.8%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">45.5%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">36.4%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">18.2%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">CallMcpTool</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Call an MCP tool by server identifier and tool name with arbitrary
+            JSON arguments. IMPORTANT: Always read the tool's schema/descriptor
+            BEFORE calling to ensure correct parameters. Example: { "server":
+            "my-mcp-server", "toolName": "search", "arguments": { "query":
+            "example", "limit": 10 } }
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">7 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">7 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">1 model</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 1.2%"></div>
+              </div>
+              <span class="tc-bar-label">1.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">100.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">CreatePlan</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Use this tool to create a concise plan for accomplishing the user's
+            request. This tool should be called at the end of the planning phase
+            to finalize and store the plan. The plan you create should be
+            properly formatted in markdown, using appropriate sections and
+            headers. The plan should be very concise and actionable, providing
+            the minimum amount of detail for the user to understand and action
+            the plan. It may be helpful to identify the most important couple
+            files you will change, and existing code you will leverage. Cite
+            specific file paths and essential snippets of code. IMPORTANT: Do
+            NOT use markdown tables in plan content (they cannot be rendered for
+            the user); use bullet lists instead. The first line MUST BE A TITLE
+            for the plan formatted as a level 1 markdown heading. TASK
+            ORGANIZATION: Use 'todos' for organizing implementation tasks: -
+            Each todo should be a clear, specific, and actionable task - Each
+            todo needs a unique ID (e.g., "setup-auth") and descriptive content
+            - If the plan is simple, provide just a few high-level todos or none
+            at all UPDATING THE PLAN: - This tool creates a NEW plan file each
+            time it is called - The plan file URI will be returned in the tool
+            result - To update an existing plan, read and edit the plan file
+            directly using your file editing tools - Do NOT call this tool again
+            to update an existing plan Additional guidelines: - Avoid asking
+            clarifying questions in the plan itself. Ask them before calling
+            this tool. Present these to the user using the AskQuestion tool. -
+            Todos help break down complex plans into manageable, trackable tasks
+            - Focus on high-level meaningful decisions rather than low-level
+            implementation details - A good plan is glanceable, not a wall of
+            text.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">3 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">3 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">3 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">3 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">3 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(255, 166, 87)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 1.2%"></div>
+              </div>
+              <span class="tc-bar-label">1.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">42.9%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(255, 166, 87)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-sonnet-4-6</span
+              ><span class="tc-model-value">42.9%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">14.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">updateCurrentStep</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Record a concise (6 words or less), user-friendly update of the
+            major step or phase you are working on for the parent timeline.
+            Update when the subtask changes. Set `final_summary` and
+            `completed_subtitle` ONCE per response as your last action before
+            the final response. ALWAYS use in parallel with at least one other
+            tool. ALWAYS start the update with a descriptive verb.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">5 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">2 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">7</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">5 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">2 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">2 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 1.2%"></div>
+              </div>
+              <span class="tc-bar-label">1.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">71.4%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">28.6%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">Delete</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Deletes a file at the specified path. The operation will fail
+            gracefully if: - The file doesn't exist - The operation is rejected
+            for security reasons - The file cannot be deleted
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">4</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">4 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">3</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">3 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.33</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.33 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">1 model</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 0.7%"></div>
+              </div>
+              <span class="tc-bar-label">0.7%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">100.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">AskQuestion</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Collect structured multiple-choice answers from the user. Provide
+            one or more questions with options, and set allow_multiple when
+            multi-select is appropriate. Use this tool when you need to gather
+            specific information from the user through a structured question
+            format. Each question should have: - A unique id (used to match
+            answers) - A clear prompt/question text - At least 2 options for the
+            user to choose from - An optional allow_multiple flag (defaults to
+            false for single-select) By default, the tool will present the
+            questions to the user and wait for their responses before
+            continuing. Prefer this tool over listing options in your response
+            text (as letters, numbers, bullet points, etc.). Also use it when
+            you are blocked and need the user to choose a path forward.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">3</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 calls</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">3</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">2 req</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">2 models</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(126, 231, 135)"
+            ></span
+            ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span>
+          </div>
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 0.5%"></div>
+              </div>
+              <span class="tc-bar-label">0.5%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(126, 231, 135)"
+              ></span
+              ><span class="tc-model-label">eu.anthropic.claude-opus-4-7</span
+              ><span class="tc-model-value">66.7%</span>
+            </div>
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">33.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">EditNotebook</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Use this tool to edit a jupyter notebook cell. Use ONLY this tool to
+            edit notebooks. This tool supports editing existing cells and
+            creating new cells: - If you need to edit an existing cell, set
+            'is_new_cell' to false and provide the 'old_string' and
+            'new_string'. -- The tool will replace ONE occurrence of
+            'old_string' with 'new_string' in the specified cell. - If you need
+            to create a new cell, set 'is_new_cell' to true and provide the
+            'new_string' (and keep 'old_string' empty). - It's critical that you
+            set the 'is_new_cell' flag correctly! - This tool does NOT support
+            cell deletion, but you can delete the content of a cell by passing
+            an empty string as the 'new_string'. Other requirements: - Cell
+            indices are 0-based. - 'old_string' and 'new_string' should be a
+            valid cell content, i.e. WITHOUT any JSON syntax that notebook files
+            use under the hood. - The old_string MUST uniquely identify the
+            specific instance you want to change. This means: -- Include AT
+            LEAST 3-5 lines of context BEFORE the change point -- Include AT
+            LEAST 3-5 lines of context AFTER the change point - This tool can
+            only change ONE instance at a time. If you need to change multiple
+            instances: -- Make separate calls to this tool for each instance --
+            Each call must uniquely identify its specific instance using
+            extensive context - This tool might save markdown cells as "raw"
+            cells. Don't try to change it, it's fine. We need it to properly
+            display the diff. - If you need to create a new notebook, just set
+            'is_new_cell' to true and cell_idx to 0. - ALWAYS generate arguments
+            in the following order: target_notebook, cell_idx, is_new_cell,
+            cell_language, old_string, new_string. - Prefer editing existing
+            cells over creating new ones! - ALWAYS provide ALL required
+            arguments (including BOTH old_string and new_string). NEVER call
+            this tool without providing 'new_string'.
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">1 model</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 0.2%"></div>
+              </div>
+              <span class="tc-bar-label">0.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">100.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tc-tool-name">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger tc-name-trigger">WebSearch</span>
+        <div class="tc-hover-tooltip tc-tooltip-wide" role="tooltip">
+          <div class="tc-desc-row">
+            Search the web for real-time information about any topic. Returns
+            summarized information from search results and relevant URLs. Use
+            this tool when you need up-to-date information that might not be
+            available or correct in your training data, or when you need to
+            verify current facts. This includes queries about: - Libraries,
+            frameworks, and tools whose APIs, best practices, or usage
+            instructions are frequently updated. ("How do I run Postgres in a
+            container?") - Current events or technology news. ("Which AI model
+            is best for coding?") - Informational queries similar to what you
+            might Google ("kubernetes operator for mysql") IMPORTANT - Use the
+            correct year in search queries: - Today's date is 2026-05-19. You
+            MUST use this year when searching for recent information,
+            documentation, or current events. - Example: If today is 2026-05-19
+            and the user asks for "latest React docs", search for "React
+            documentation 2026", NOT "React documentation 2025"
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-count tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 calls</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-reqs tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1 req</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-avg tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger">1.00</span>
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            ><span class="tc-model-value">1.00 avg</span>
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="num tc-models-cell">
+      <div class="tc-hover-cell">
+        <span class="tc-hover-trigger"
+          ><span class="tc-models-trigger-text">1 model</span></span
+        >
+        <div class="tc-hover-tooltip" role="tooltip">
+          <div class="tc-model-row">
+            <span
+              class="tc-model-swatch"
+              style="background: rgb(88, 166, 255)"
+            ></span
+            ><span class="tc-model-label"
+              >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+            >
+          </div>
+        </div>
+      </div>
+    </td>
+    <td class="tc-bar-cell tc-models-cell">
+      <div class="tc-bar-cell-inner">
+        <div class="tc-hover-cell">
+          <span class="tc-hover-trigger"
+            ><div class="tc-bar-wrap">
+              <div class="tc-bar-track">
+                <div class="tc-bar tc-bar-share" style="width: 0.2%"></div>
+              </div>
+              <span class="tc-bar-label">0.2%</span>
+            </div></span
+          >
+          <div class="tc-hover-tooltip" role="tooltip">
+            <div class="tc-model-row">
+              <span
+                class="tc-model-swatch"
+                style="background: rgb(88, 166, 255)"
+              ></span
+              ><span class="tc-model-label"
+                >bartowski/Qwen_Qwen3.6-35B-A3B-GGUF:Q4_K_M</span
+              ><span class="tc-model-value">100.0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</tbody>

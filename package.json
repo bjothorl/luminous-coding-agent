@@ -1,0 +1,36 @@
+{
+  "name": "luminous",
+  "version": "0.1.0",
+  "description": "Luminous - a terminal coding agent with an orchestrator delegating to specialized, per-model subagents (llama.cpp / OpenAI-compatible backends)",
+  "type": "module",
+  "bin": {
+    "luminous": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/cli.tsx",
+    "dev": "tsx src/cli.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@langchain/core": "^1.1.48",
+    "@langchain/openai": "^1.4.7",
+    "fast-glob": "^3.3.3",
+    "ink": "^7.0.5",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^6.0.0",
+    "langchain": "^1.4.4",
+    "react": "^19.2.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

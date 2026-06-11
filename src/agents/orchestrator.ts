@@ -2,6 +2,7 @@ import type { LuminousTool, ToolContext } from "../tools/base.js";
 import { GlobTool } from "../tools/glob.js";
 import { GrepTool } from "../tools/grep.js";
 import { ReadTool } from "../tools/read.js";
+import { ShellTool } from "../tools/shell.js";
 import { TaskTool } from "../tools/task.js";
 import { TodoWriteTool } from "../tools/todoWrite.js";
 import { BaseAgent, type AgentDeps } from "./base.js";
@@ -47,6 +48,7 @@ export class OrchestratorAgent extends BaseAgent {
       new ReadTool(ctx),
       new GrepTool(ctx),
       new GlobTool(ctx),
+      new ShellTool(ctx),
       new TodoWriteTool(ctx),
       new TaskTool(ctx, this.deps),
     ];

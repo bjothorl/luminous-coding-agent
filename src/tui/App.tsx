@@ -7,6 +7,7 @@ import type { LuminousConfig } from "../config/index.js";
 import { resolveModelConfig } from "../config/index.js";
 import type { ApprovalRequest, SessionBus } from "../session/events.js";
 import type { SessionStore } from "../session/store.js";
+import { deserializeMessages } from "../session/messages.js";
 import type { TodoStore } from "../session/todo.js";
 import type { UsageTracker } from "../session/usage.js";
 import { formatTokens } from "../session/usage.js";
@@ -53,10 +54,9 @@ export function App({ services }: { services: AppServices }) {
   const { stdout } = useStdout();
 
   const [chatItems, setChatItems] = useState<ChatItem[]>(() =>
-    store.history().map((entry) => ({
+    store.chat().map((entry) => ({
       id: ++chatSeq,
-      kind: entry.role === "user" ? "user" : "assistant",
-      text: entry.text,
+      ...entry,
     }))
   );
   const [streamingText, setStreamingText] = useState("");
@@ -64,7 +64,7 @@ export function App({ services }: { services: AppServices }) {
   const [agents, setAgents] = useState<Map<string, AgentView>>(new Map());
   const [approvalQueue, setApprovalQueue] = useState<ApprovalRequest[]>([]);
   const [lastEdit, setLastEdit] = useState<EditView | undefined>(undefined);
-  const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
+  const [todoItems, setTodoItems] = useState<TodoItem[]>(() => store.snapshot().todos);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [scrollBack, setScrollBack] = useState(0);
@@ -94,11 +94,25 @@ export function App({ services }: { services: AppServices }) {
     });
   }, []);
 
-  const addChat = useCallback((item: Omit<ChatItem, "id">) => {
-    const id = ++chatSeq;
-    setChatItems((prev) => [...prev, { ...item, id }]);
-    return id;
-  }, []);
+  const syncChatToStore = useCallback(
+    (items: ChatItem[]) => {
+      store.setChat(items.map(({ id, ...rest }) => rest));
+    },
+    [store]
+  );
+
+  const addChat = useCallback(
+    (item: Omit<ChatItem, "id">) => {
+      const id = ++chatSeq;
+      setChatItems((prev) => {
+        const next = [...prev, { ...item, id }];
+        syncChatToStore(next);
+        return next;
+      });
+      return id;
+    },
+    [syncChatToStore]
+  );
 
   const clearOrchestratorStream = useCallback(() => {
     streamingRef.current = "";
@@ -236,9 +250,13 @@ export function App({ services }: { services: AppServices }) {
           const rowId = toolRows.current.get(event.callId);
           if (rowId !== undefined) {
             toolRows.current.delete(event.callId);
-            setChatItems((prev) =>
-              prev.map((item) => (item.id === rowId ? { ...item, ok: event.ok, text: event.detail } : item))
-            );
+            setChatItems((prev) => {
+              const next = prev.map((item) =>
+                item.id === rowId ? { ...item, ok: event.ok, text: event.detail } : item
+              );
+              syncChatToStore(next);
+              return next;
+            });
           }
           // Drop any token garbage that landed in the orchestrator stream while
           // parallel subagents were hammering the same llama-server instance.
@@ -252,17 +270,11 @@ export function App({ services }: { services: AppServices }) {
             const existing = prev.get(event.agentId);
             if (!existing) return prev;
             const next = new Map(prev);
-            next.set(event.agentId, { ...existing, tokens: existing.tokens + event.input + event.output });
-            return next;
-          });
-          break;
-        }
-        case "agent:context": {
-          setAgents((prev) => {
-            const existing = prev.get(event.agentId);
-            if (!existing) return prev;
-            const next = new Map(prev);
-            next.set(event.agentId, { ...existing, contextTokens: event.tokens });
+            next.set(event.agentId, {
+              ...existing,
+              contextTokens: event.input,
+              tokens: existing.tokens + event.input + event.output,
+            });
             return next;
           });
           break;
@@ -332,6 +344,7 @@ export function App({ services }: { services: AppServices }) {
     flushSubagentStream,
     clearOrchestratorStream,
     clearSubagentStreams,
+    syncChatToStore,
   ]);
 
   const pendingApproval = approvalQueue[0];
@@ -401,9 +414,28 @@ export function App({ services }: { services: AppServices }) {
     }
   });
 
+  const applySession = useCallback(
+    (doc: ReturnType<SessionStore["snapshot"]>) => {
+      orchestrator.loadHistory(deserializeMessages(doc.messages));
+      orchestrator.setInputTokens(doc.lastInputTokens);
+      usage.reset(doc.usage);
+      todos.restore(doc.todos);
+      setChatItems(doc.chat.map((entry) => ({ id: ++chatSeq, ...entry })));
+      setScrollBack(0);
+      clearOrchestratorStream();
+      clearSubagentStreams();
+      setAgents(new Map());
+      setAgentScrollBack(0);
+      toolRows.current.clear();
+      setLastEdit(undefined);
+    },
+    [clearOrchestratorStream, clearSubagentStreams, orchestrator, todos, usage]
+  );
+
   const handleCommand = useCallback(
     (command: string): boolean => {
-      const cmd = command.trim().toLowerCase();
+      const trimmed = command.trim();
+      const cmd = trimmed.toLowerCase();
       if (cmd === "/help") {
         addChat({
           kind: "info",
@@ -411,6 +443,7 @@ export function App({ services }: { services: AppServices }) {
             "/agents  show agent roles and their models",
             "/model   show resolved model endpoints",
             "/cost    show token usage",
+            "/resume  list saved sessions, or /resume <filename> to load one",
             "/clear   clear chat, orchestrator memory, and agent list",
             "/exit    quit",
           ].join("\n"),
@@ -434,6 +467,7 @@ export function App({ services }: { services: AppServices }) {
       }
       if (cmd === "/clear") {
         orchestrator.clearHistory();
+        todos.restore([]);
         store.clear();
         setChatItems([]);
         setScrollBack(0);
@@ -443,6 +477,39 @@ export function App({ services }: { services: AppServices }) {
         setAgentScrollBack(0);
         toolRows.current.clear();
         addChat({ kind: "info", text: "(chat, orchestrator memory, and agent list cleared)" });
+        return true;
+      }
+      if (cmd === "/resume" || cmd.startsWith("/resume ")) {
+        if (busy) {
+          addChat({ kind: "info", text: "(cannot resume while a run is in progress)" });
+          return true;
+        }
+        const arg = trimmed.slice("/resume".length).trim();
+        if (!arg) {
+          const sessions = store.listSessions();
+          if (sessions.length === 0) {
+            addChat({ kind: "info", text: "(no saved sessions)" });
+            return true;
+          }
+          const lines = sessions.map(
+            (s) =>
+              `${s.filename}  ${new Date(s.updatedAt).toLocaleString()}  ${s.messageCount} msgs  ${formatTokens(s.usageTotal)} tok`
+          );
+          addChat({ kind: "info", text: ["saved sessions:", ...lines].join("\n") });
+          return true;
+        }
+        const filePath = store.resolveSessionFile(arg);
+        if (!filePath) {
+          addChat({ kind: "info", text: `session not found: ${arg}` });
+          return true;
+        }
+        const doc = store.loadSession(filePath);
+        if (!doc) {
+          addChat({ kind: "info", text: `failed to load session: ${arg}` });
+          return true;
+        }
+        applySession(doc);
+        addChat({ kind: "info", text: `resumed ${path.basename(filePath)}` });
         return true;
       }
       if (cmd === "/exit" || cmd === "/quit") {
@@ -455,7 +522,7 @@ export function App({ services }: { services: AppServices }) {
       }
       return false;
     },
-    [addChat, clearOrchestratorStream, clearSubagentStreams, config, exit, orchestrator, store, usage]
+    [addChat, applySession, busy, clearOrchestratorStream, clearSubagentStreams, config, exit, orchestrator, store, todos, usage]
   );
 
   const handleSubmit = useCallback(
@@ -470,7 +537,6 @@ export function App({ services }: { services: AppServices }) {
       }
 
       addChat({ kind: "user", text });
-      store.append({ role: "user", text, ts: Date.now() });
       setScrollBack(0);
       setBusy(true);
       const controller = new AbortController();
@@ -486,7 +552,6 @@ export function App({ services }: { services: AppServices }) {
           if (finalText && finalText !== remainder) {
             if (!remainder) addChat({ kind: "assistant", text: finalText });
           }
-          store.append({ role: "assistant", text: finalText || remainder, ts: Date.now() });
         })
         .catch((err) => {
           addChat({ kind: "error", text: `orchestrator failed: ${(err as Error).message}` });
@@ -506,7 +571,7 @@ export function App({ services }: { services: AppServices }) {
 
   const agentViews = useMemo(() => [...agents.values()], [agents]);
   const orchestratorModel = resolveModelConfig(config, "orchestrator").model;
-  const orchestratorContextTokens = orchestrator.contextTokenEstimate();
+  const orchestratorContextTokens = orchestrator.inputTokens();
 
   const rows = stdout?.rows ?? 35;
   const columns = stdout?.columns ?? 100;

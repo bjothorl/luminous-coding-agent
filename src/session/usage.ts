@@ -5,13 +5,25 @@ export class UsageTracker {
   input = 0;
   output = 0;
 
-  constructor(bus: SessionBus) {
+  constructor(
+    bus: SessionBus,
+    initial?: { input: number; output: number }
+  ) {
+    if (initial) {
+      this.input = initial.input;
+      this.output = initial.output;
+    }
     bus.on((event) => {
       if (event.type === "agent:usage") {
         this.input += event.input;
         this.output += event.output;
       }
     });
+  }
+
+  reset(usage: { input: number; output: number }): void {
+    this.input = usage.input;
+    this.output = usage.output;
   }
 
   get total(): number {

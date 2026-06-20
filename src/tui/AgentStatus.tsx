@@ -10,7 +10,7 @@ export interface AgentView {
   model: string;
   state: AgentRuntimeState;
   detail: string;
-  /** Estimated prompt context size (history + tools + system). */
+  /** Provider-reported input tokens from the latest API call. */
   contextTokens: number;
   /** Cumulative API tokens consumed this run. */
   tokens: number;
@@ -21,7 +21,7 @@ export interface AgentView {
 export interface AgentStatusProps {
   orchestratorId: string;
   orchestratorModel: string;
-  /** Context estimate when the orchestrator is idle (not in the agent map). */
+  /** Orchestrator input tokens when idle (not in the agent map). */
   orchestratorContextTokens: number;
   agents: AgentView[];
   busy: boolean;

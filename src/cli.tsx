@@ -4,11 +4,11 @@ import React from "react";
 import { render } from "ink";
 import { OrchestratorAgent } from "./agents/orchestrator.js";
 import type { AgentDeps } from "./agents/base.js";
-import { loadConfig, resolveModelConfig, ConfigError } from "./config/index.js";
-import { checkConnectivity } from "./providers/index.js";
+import { loadConfig, ConfigError } from "./config/index.js";
 import { ApprovalService } from "./session/approvals.js";
 import { FileClaimRegistry } from "./session/claims.js";
 import { SessionBus } from "./session/events.js";
+import { deserializeMessages } from "./session/messages.js";
 import { SessionStore } from "./session/store.js";
 import { TodoStore } from "./session/todo.js";
 import { UsageTracker, formatTokens } from "./session/usage.js";
@@ -44,7 +44,7 @@ const HELP = `luminous - terminal coding agent (orchestrator + specialized subag
 Usage:
   luminous                 start the interactive TUI in the current directory
   luminous -p "<task>"     run one task headless and print the result
-  luminous --resume        resume the latest session transcript
+  luminous --resume        resume the latest saved session
   luminous --cwd <dir>     use <dir> as the project root
 
 Configuration (~/.luminous/config.json, overridden by <project>/.luminous/config.json):
@@ -79,19 +79,24 @@ async function main(): Promise<void> {
     claims: new FileClaimRegistry(),
     todos: new TodoStore(bus),
   };
-  const usage = new UsageTracker(bus);
   const orchestrator = new OrchestratorAgent(deps);
 
   if (headless) {
+    const usage = new UsageTracker(bus);
     await runHeadless(args.print!, orchestrator, bus, usage);
     return;
   }
 
-  const store = new SessionStore(cwd, args.resume);
+  const store = new SessionStore(cwd, bus, { resume: args.resume });
+  store.attachOrchestrator(orchestrator);
+
+  const snapshot = store.snapshot();
+  const usage = new UsageTracker(bus, snapshot.usage);
+
   if (args.resume) {
-    orchestrator.seedHistory(
-      store.history().map(({ role, text }) => ({ role, text })),
-    );
+    orchestrator.loadHistory(deserializeMessages(snapshot.messages));
+    orchestrator.setInputTokens(snapshot.lastInputTokens);
+    deps.todos.restore(snapshot.todos);
   }
 
   // const orchestratorModel = resolveModelConfig(config, "orchestrator");

@@ -23,7 +23,6 @@ export type SessionEvent =
   | { type: "agent:tool:start"; agentId: string; callId: string; tool: string; detail: string }
   | { type: "agent:tool:end"; agentId: string; callId: string; tool: string; ok: boolean; detail: string }
   | { type: "agent:usage"; agentId: string; input: number; output: number }
-  | { type: "agent:context"; agentId: string; tokens: number }
   | { type: "agent:done"; agentId: string; report: TaskReport }
   | { type: "agent:error"; agentId: string; error: string }
   | { type: "approval:request"; request: ApprovalRequest }

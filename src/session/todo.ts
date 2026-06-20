@@ -18,6 +18,11 @@ export class TodoStore {
     return [...this.todos];
   }
 
+  restore(todos: TodoItem[]): void {
+    this.todos = [...todos];
+    this.bus.emit({ type: "todo:update", todos: this.list() });
+  }
+
   update(items: TodoItem[], merge: boolean): TodoItem[] {
     if (merge) {
       for (const item of items) {
